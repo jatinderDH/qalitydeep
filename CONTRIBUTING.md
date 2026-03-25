@@ -6,7 +6,7 @@ Thank you for your interest in contributing to QAlityDeep! This guide will help 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/qalitydeep/qalitydeep.git
+   git clone https://github.com/jatinderDH/qalitydeep.git
    cd qalitydeep
    ```
 
@@ -108,7 +108,7 @@ qalitydeep/
 
 ## Reporting Issues
 
-Use [GitHub Issues](https://github.com/qalitydeep/qalitydeep/issues) to report bugs or request features. Include:
+Use [GitHub Issues](https://github.com/jatinderDH/qalitydeep/issues) to report bugs or request features. Include:
 - QAlityDeep version (`qalitydeep --version`)
 - Python version
 - Operating system

@@ -9,7 +9,7 @@ Verify that your LLM responses, AI-generated code, and agent outputs are correct
 [![PyPI version](https://img.shields.io/pypi/v/qalitydeep.svg)](https://pypi.org/project/qalitydeep/)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![CI](https://github.com/qalitydeep/qalitydeep/actions/workflows/ci.yml/badge.svg)](https://github.com/qalitydeep/qalitydeep/actions/workflows/ci.yml)
+[![CI](https://github.com/jatinderDH/qalitydeep/actions/workflows/ci.yml/badge.svg)](https://github.com/jatinderDH/qalitydeep/actions/workflows/ci.yml)
 
 </div>
 
@@ -73,7 +73,7 @@ pip install "qalitydeep[all]"
 **Development (editable install):**
 
 ```bash
-git clone https://github.com/qalitydeep/qalitydeep.git
+git clone https://github.com/jatinderDH/qalitydeep.git
 cd qalitydeep
 pip install -e ".[all]"
 ```
@@ -432,7 +432,7 @@ Contributions are welcome. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 
 ```bash
 # Development setup
-git clone https://github.com/qalitydeep/qalitydeep.git
+git clone https://github.com/jatinderDH/qalitydeep.git
 cd qalitydeep
 python -m venv .venv
 source .venv/bin/activate
@@ -456,7 +456,7 @@ MIT License. See [LICENSE](LICENSE) for the full text.
 
 ## Links
 
-- [Documentation](https://github.com/qalitydeep/qalitydeep/wiki)
+- [Documentation](https://github.com/jatinderDH/qalitydeep/wiki)
 - [PyPI Package](https://pypi.org/project/qalitydeep/)
-- [GitHub Issues](https://github.com/qalitydeep/qalitydeep/issues)
+- [GitHub Issues](https://github.com/jatinderDH/qalitydeep/issues)
 - [Changelog](CHANGELOG.md)

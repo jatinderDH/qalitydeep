@@ -39,4 +39,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - FastAPI evaluation server with API key authentication.
 - JSON-based storage for datasets and evaluation runs.
 
-[0.1.0]: https://github.com/qalitydeep/qalitydeep/releases/tag/v0.1.0
+[0.1.0]: https://github.com/jatinderDH/qalitydeep/releases/tag/v0.1.0
