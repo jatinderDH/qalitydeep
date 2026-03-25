@@ -845,6 +845,168 @@ def metrics() -> None:
 
 
 # ---------------------------------------------------------------------------
+# Command: compare  (Phase 2)
+# ---------------------------------------------------------------------------
+
+@app.command(
+    help="Compare two evaluation runs side-by-side, showing improvements and regressions.",
+    rich_help_panel="Comparison",
+)
+def compare(
+    baseline: str = typer.Argument(..., help="Baseline run ID."),
+    candidate: str = typer.Argument(..., help="Candidate run ID to compare against baseline."),
+) -> None:
+    from .comparison import compare_runs
+    from .storage import load_eval_run
+
+    baseline_run = load_eval_run(baseline)
+    if baseline_run is None:
+        console.print(f"[red]Baseline run '{baseline}' not found.[/red]")
+        raise typer.Exit(code=1)
+
+    candidate_run = load_eval_run(candidate)
+    if candidate_run is None:
+        console.print(f"[red]Candidate run '{candidate}' not found.[/red]")
+        raise typer.Exit(code=1)
+
+    result = compare_runs(baseline_run, candidate_run)
+
+    # Print metric summaries
+    console.print(
+        Panel(
+            f"[bold]Baseline:[/bold]  {result.baseline_run_id}\n"
+            f"[bold]Candidate:[/bold] {result.candidate_run_id}",
+            title="Run Comparison",
+            border_style="blue",
+            expand=False,
+        )
+    )
+
+    metric_table = Table(title="Metric Summary", show_lines=True)
+    metric_table.add_column("Metric", style="bold")
+    metric_table.add_column("Baseline", justify="right")
+    metric_table.add_column("Candidate", justify="right")
+    metric_table.add_column("Delta", justify="right")
+    metric_table.add_column("Improved", justify="right")
+    metric_table.add_column("Regressed", justify="right")
+
+    for ms in result.metric_summaries:
+        delta_style = "green" if ms.delta > 0.001 else ("red" if ms.delta < -0.001 else "dim")
+        delta_prefix = "+" if ms.delta > 0 else ""
+        metric_table.add_row(
+            ms.name,
+            f"{ms.baseline_avg:.3f}",
+            f"{ms.candidate_avg:.3f}",
+            f"[{delta_style}]{delta_prefix}{ms.delta:.3f}[/{delta_style}]",
+            f"[green]{ms.improved_count}[/green]" if ms.improved_count else "0",
+            f"[red]{ms.regressed_count}[/red]" if ms.regressed_count else "0",
+        )
+
+    console.print(metric_table)
+
+    # Summary line
+    parts = []
+    if result.total_improved:
+        parts.append(f"[green]{result.total_improved} improved[/green]")
+    if result.total_regressed:
+        parts.append(f"[red]{result.total_regressed} regressed[/red]")
+    if result.total_unchanged:
+        parts.append(f"[dim]{result.total_unchanged} unchanged[/dim]")
+    if result.total_new:
+        parts.append(f"[cyan]{result.total_new} new[/cyan]")
+    if result.total_removed:
+        parts.append(f"[yellow]{result.total_removed} removed[/yellow]")
+
+    console.print(f"\nCases: {', '.join(parts)}")
+
+    if result.has_regressions:
+        console.print("\n[bold red]REGRESSIONS DETECTED[/bold red]")
+        raise typer.Exit(code=1)
+    else:
+        console.print("\n[bold green]NO REGRESSIONS[/bold green]")
+
+
+# ---------------------------------------------------------------------------
+# Command: report  (Phase 2)
+# ---------------------------------------------------------------------------
+
+@app.command(
+    help="Generate an interactive HTML report from an evaluation run.",
+    rich_help_panel="Reporting",
+)
+def report(
+    run_id: str = typer.Argument(..., help="Run ID to generate report for."),
+    output_path: str = typer.Option(
+        "report.html",
+        "--output",
+        "-o",
+        help="Output file path for the HTML report.",
+    ),
+    threshold: float = typer.Option(
+        0.5,
+        "--threshold",
+        "-t",
+        help="Pass/fail threshold for scoring.",
+    ),
+) -> None:
+    from .reports import HtmlReportGenerator
+    from .storage import load_eval_run
+
+    run = load_eval_run(run_id)
+    if run is None:
+        console.print(f"[red]Run '{run_id}' not found.[/red]")
+        raise typer.Exit(code=1)
+
+    gen = HtmlReportGenerator()
+    gen.write_file(run, output_path, threshold=threshold)
+    console.print(f"[green]Report written to {output_path}[/green]")
+
+
+# ---------------------------------------------------------------------------
+# Command: plugins  (Phase 2)
+# ---------------------------------------------------------------------------
+
+@app.command(
+    help="List installed QAlityDeep plugins.",
+    rich_help_panel="Info",
+)
+def plugins() -> None:
+    from .plugins import list_plugins_table
+    list_plugins_table()
+
+
+# ---------------------------------------------------------------------------
+# Command: mcp-server  (Phase 2)
+# ---------------------------------------------------------------------------
+
+@app.command(
+    name="mcp-server",
+    help="Start the MCP server for AI coding tool integration (Claude Code, Cursor).",
+    rich_help_panel="Server",
+)
+def mcp_server() -> None:
+    try:
+        from .mcp_server import main as mcp_main
+    except ImportError as exc:
+        console.print(
+            "[red]MCP SDK not installed.[/red] "
+            "Install with: [bold]pip install mcp[/bold]"
+        )
+        raise typer.Exit(code=1) from exc
+
+    console.print(
+        Panel(
+            "[bold]QAlityDeep MCP Server[/bold]\n"
+            "AI coding tools can now invoke evaluation tools.\n"
+            "Press Ctrl+C to stop.",
+            border_style="cyan",
+            expand=False,
+        )
+    )
+    mcp_main()
+
+
+# ---------------------------------------------------------------------------
 # Backwards-compatible entry point
 # ---------------------------------------------------------------------------
 

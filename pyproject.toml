@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "qalitydeep"
-version = "0.1.0"
+version = "0.2.0"
 description = "Pre-deploy CI/CD QA dashboard for evaluating LLM and AI-agent outputs"
 readme = "README.md"
 license = "MIT"
@@ -60,13 +60,19 @@ api = [
     "fastapi>=0.115.0",
     "uvicorn[standard]>=0.30.0",
 ]
+mcp = [
+    "mcp>=1.0.0",
+]
+stats = [
+    "scipy>=1.11.0",
+]
 dev = [
     "pytest",
     "ruff",
     "mypy",
 ]
 all = [
-    "qalitydeep[dashboard,api,dev]",
+    "qalitydeep[dashboard,api,mcp,stats,dev]",
 ]
 
 [project.scripts]

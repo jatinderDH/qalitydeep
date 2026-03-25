@@ -18,6 +18,16 @@ from .programmatic import (
     RegexMatchMetric,
     StartsWithMetric,
 )
+from .conversation import (
+    ConversationCoherenceMetric,
+    ContextRetentionMetric,
+    TurnCountMetric,
+)
+from .agent import (
+    LoopDetectionMetric,
+    ToolEfficiencyMetric,
+    ToolSequenceMetric,
+)
 
 # ---------------------------------------------------------------------------
 # Metric registry
@@ -62,6 +72,12 @@ register_metric("starts_with", StartsWithMetric)
 register_metric("code_syntax", CodeSyntaxMetric)
 register_metric("code_diff", CodeDiffMetric)
 register_metric("code_execution", CodeExecutionMetric)
+register_metric("conversation_coherence", ConversationCoherenceMetric)
+register_metric("context_retention", ContextRetentionMetric)
+register_metric("turn_count", TurnCountMetric)
+register_metric("tool_sequence", ToolSequenceMetric)
+register_metric("loop_detection", LoopDetectionMetric)
+register_metric("tool_efficiency", ToolEfficiencyMetric)
 
 __all__ = [
     # Base classes
@@ -78,6 +94,14 @@ __all__ = [
     "CodeSyntaxMetric",
     "CodeDiffMetric",
     "CodeExecutionMetric",
+    # Conversation metrics
+    "ConversationCoherenceMetric",
+    "ContextRetentionMetric",
+    "TurnCountMetric",
+    # Agent metrics
+    "ToolSequenceMetric",
+    "LoopDetectionMetric",
+    "ToolEfficiencyMetric",
     # Registry utilities
     "METRIC_REGISTRY",
     "register_metric",
