@@ -1,0 +1,108 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "qalitydeep"
+version = "0.1.0"
+description = "Pre-deploy CI/CD QA dashboard for evaluating LLM and AI-agent outputs"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+    { name = "QAlityDeep Team" },
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+]
+
+# --- Core dependencies ---
+dependencies = [
+    # Evaluation & agent frameworks
+    "deepeval>=0.23.0",
+    "langgraph>=0.2.0",
+    "langsmith>=0.1.0",
+    "agentevals>=0.0.6",
+    "langchain-core>=0.3.0",
+    "langchain-community>=0.3.0",
+    "langchain-openai>=0.2.0",
+    "langchain-anthropic>=0.2.0",
+    "anthropic>=0.39.0",
+    # Data & utilities
+    "pandas>=2.2.0",
+    "python-dotenv>=1.0.1",
+    "requests>=2.31.0",
+    "pydantic>=2.8.0",
+    # Phase 1: CLI & config
+    "typer[all]>=0.12.0",
+    "rich>=13.0.0",
+    "pyyaml>=6.0.0",
+    "watchdog>=4.0.0",
+]
+
+[project.optional-dependencies]
+dashboard = [
+    "streamlit>=1.40.0",
+    "plotly>=5.22.0",
+    "reportlab>=4.2.0",
+]
+api = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+]
+dev = [
+    "pytest",
+    "ruff",
+    "mypy",
+]
+all = [
+    "qalitydeep[dashboard,api,dev]",
+]
+
+[project.scripts]
+qalitydeep = "qalitydeep.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/qalitydeep/qalitydeep"
+Repository = "https://github.com/qalitydeep/qalitydeep"
+Issues = "https://github.com/qalitydeep/qalitydeep/issues"
+
+# --- Build configuration ---
+[tool.hatch.build.targets.wheel]
+packages = ["qalitydeep"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "qalitydeep/**/*",
+    "README.md",
+    "pyproject.toml",
+]
+
+# --- Ruff linter/formatter ---
+[tool.ruff]
+line-length = 120
+target-version = "py39"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "SIM", # flake8-simplify
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["qalitydeep"]

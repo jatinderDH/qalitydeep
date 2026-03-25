@@ -1,0 +1,15 @@
+version: "1"
+defaults:
+  metrics: [exact_match, contains, code_syntax]
+  threshold: 0.7
+
+suites:
+  - name: my_test
+    test_cases:
+      - id: t1
+        input: "Write a hello function"
+        actual_output: "def hello(): return 'hi'"
+        expected_output: "def hello(): return 'hi'"
+      - id: t2
+        input: "Generate valid JSON"
+        actual_output: '{"name": "test"}'

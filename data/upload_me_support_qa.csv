@@ -1,0 +1,6 @@
+id,prompt,expected_output,expected_tool_calls
+1,"What is your refund policy?","We offer a 30-day full refund at no extra cost.","[{\"name\": \"search_policy\", \"input\": {\"query\": \"refund\"}}]"
+2,"How long does shipping take?","Standard shipping takes 3-5 business days.","[{\"name\": \"search_policy\", \"input\": {\"query\": \"shipping\"}}]"
+3,"Do you ship internationally?","Yes, we ship to most countries worldwide.","[{\"name\": \"search_policy\", \"input\": {\"query\": \"international\"}}]"
+4,"What is your return policy?","Returns accepted within 30 days. Item must be unused.","[{\"name\": \"search_policy\", \"input\": {\"query\": \"returns\"}}]"
+5,"Is there a warranty?","1-year manufacturer warranty on all products.","[{\"name\": \"search_policy\", \"input\": {\"query\": \"warranty\"}}]"

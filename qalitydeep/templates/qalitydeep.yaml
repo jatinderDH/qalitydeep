@@ -1,0 +1,18 @@
+version: "1"
+
+defaults:
+  metrics: [correctness, relevancy]
+  threshold: 0.7
+
+suites:
+  - name: sample_qa
+    description: "Sample QA evaluation suite - customize with your own test cases"
+    test_cases:
+      - input: "What is your refund policy?"
+        expected_output: "We offer a 30-day full refund on all purchases"
+
+      - input: "Do you ship internationally?"
+        expected_output: "Yes, we ship worldwide with delivery in 5-10 business days"
+
+      - input: "How do I reset my password?"
+        expected_output: "Go to Settings > Account > Reset Password"

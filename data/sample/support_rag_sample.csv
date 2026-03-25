@@ -1,0 +1,4 @@
+id,prompt,expected_output
+1,"What is your refund policy?","We offer a 30-day full refund at no extra cost."
+2,"How long does shipping take?","Standard shipping takes 3-5 business days."
+3,"Do you ship internationally?","Yes, we ship to most countries worldwide."

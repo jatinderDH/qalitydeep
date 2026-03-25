@@ -1,0 +1,103 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background: #0f0f0f; color: #e0e0e0; }
+#root { height: 100vh; }
+
+.app { height: 100%; display: flex; flex-direction: column; }
+
+/* Fixed top: header + URL bar (non-moving) */
+.app-header {
+  flex-shrink: 0;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid #2a2a2a;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.app-brand { color: #fff; }
+.app-header-doc { color: #888; font-weight: 400; font-size: 0.85rem; }
+
+.url-bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #333;
+  background: #141414;
+}
+.method-pill {
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.url-input {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background: #0d0d0d;
+  color: #e0e0e0;
+  font-size: 0.9rem;
+}
+.url-input::placeholder { color: #555; }
+.btn-send { white-space: nowrap; }
+.url-close { margin-left: 0.25rem; }
+
+.app-body { flex: 1; min-height: 0; overflow: hidden; }
+
+.panel { padding: 1rem; overflow: auto; background: #1a1a1a; }
+.panel-nav { min-width: 180px; }
+.panel-builder { min-width: 280px; }
+.panel-viewer { min-width: 320px; display: flex; flex-direction: column; min-height: 0; }
+.panel-request { min-height: 120px; }
+.panel-response { min-height: 120px; }
+
+.resize-handle { width: 6px; background: #333; cursor: col-resize; flex-shrink: 0; }
+.resize-handle:hover { background: #555; }
+.resize-handle[data-resize-handle-active] { background: #666; }
+.resize-handle-vertical { width: 100%; height: 6px; cursor: row-resize; }
+
+.section-title { font-size: 0.7rem; text-transform: uppercase; color: #888; margin: 1rem 0 0.5rem; }
+.section-title:first-child { margin-top: 0; }
+.label { font-size: 0.85rem; margin-bottom: 0.25rem; color: #aaa; }
+.label span { color: #666; font-weight: normal; }
+input, textarea, select { width: 100%; padding: 0.5rem; border: 1px solid #444; border-radius: 4px; background: #0d0d0d; color: #e0e0e0; font-size: 0.9rem; }
+textarea { min-height: 60px; resize: vertical; }
+input::placeholder, textarea::placeholder { color: #555; }
+
+.btn { padding: 0.5rem 1rem; border-radius: 6px; border: none; cursor: pointer; font-size: 0.9rem; }
+.btn-primary { background: #e11; color: white; }
+.btn-primary:hover { background: #f33; }
+.btn-secondary { background: #333; color: #e0e0e0; }
+.btn-secondary:hover { background: #444; }
+
+.nav-item { padding: 0.4rem 0; font-size: 0.9rem; color: #aaa; }
+.nav-item.active { color: #fff; font-weight: 500; }
+.nav-section { font-size: 0.7rem; color: #666; margin-top: 1rem; text-transform: uppercase; }
+
+.tabs { display: flex; gap: 0; border-bottom: 1px solid #333; margin-bottom: 0.75rem; }
+.tab { padding: 0.5rem 1rem; cursor: pointer; font-size: 0.85rem; color: #888; background: none; border: none; }
+.tab.active { color: #fff; border-bottom: 2px solid #fff; margin-bottom: -1px; }
+.tab:hover { color: #ccc; }
+
+.viewer-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+.viewer-title { font-weight: 600; font-size: 0.9rem; }
+.viewer-actions { display: flex; gap: 0.5rem; align-items: center; }
+.code-block { background: #0d0d0d; padding: 1rem; border-radius: 6px; overflow: auto; font-family: ui-monospace, monospace; font-size: 12px; line-height: 1.5; white-space: pre; }
+.response-meta { display: flex; gap: 1rem; margin-bottom: 0.75rem; font-size: 0.85rem; }
+.response-meta .status-ok { color: #4ade80; }
+.response-meta .status-err { color: #f87171; }
+.response-expanded { max-height: 70vh; overflow: auto; }
+.response-placeholder { min-height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.icon-btn { background: none; border: none; color: #888; cursor: pointer; padding: 0.25rem; }
+.icon-btn:hover { color: #fff; }
+
+.case-item { border: 1px solid #333; border-radius: 6px; padding: 0.75rem; margin-bottom: 0.5rem; }
+.case-item h4 { margin: 0 0 0.5rem; font-size: 0.85rem; }
+.add-case { margin-top: 0.5rem; }

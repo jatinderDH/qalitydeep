@@ -1,0 +1,5 @@
+[
+  {"id": "tu1", "prompt": "Check the refund policy for damaged items", "expected_output": "Damaged items are eligible for a full refund within 30 days", "expected_tool_calls": [{"name": "search_policy", "input": {"query": "refund damaged"}}]},
+  {"id": "tu2", "prompt": "Is order #ORD-1234 eligible for a refund?", "expected_output": "Order ORD-1234 is eligible for a refund", "expected_tool_calls": [{"name": "get_refund_eligibility", "input": {"order_id": "ORD-1234", "reason": "general"}}]},
+  {"id": "tu3", "prompt": "How long does express shipping take to Europe?", "expected_output": "Express shipping to Europe takes 3-5 business days", "expected_tool_calls": [{"name": "calculate_shipping_estimate", "input": {"region": "europe", "express": true}}]}
+]
